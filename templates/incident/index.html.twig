@@ -13,10 +13,27 @@
 			{{incident.createdAt.format('Y-m-d H:i:s')}}
 		</div>
 	</div>
-	<div class="card text-bg-light">
-	<div class="card-body">
-	{% include 'event/forms/new_event.html.twig' %}
+	<div class="list-group">
+		{% for e in events %}
+			<a href="#" class="list-group-item list-group-item-action" aria-current="true">
+				
+				<div class="d-flex w-100">
+					<span class="badge event-severity text-bg-{{e.getSeverityClass}}">{{e.severity.name}}</span>
+					<div class="ms-4">
+					<h5 class="mb-1">{{e.title}}</h5>
+					<p class="mb-1">{{e.description}}</p>
+					<small class="w-auto ms-auto">Created 3 days ago</small>
+					</div>
+					
+				</div>
+
+			</a>
+		{% endfor %}
 	</div>
+	<div class="card text-bg-light">
+		<div class="card-body">
+			{% include 'event/forms/new_event.html.twig' %}
+		</div>
 	</div>
 	{{dump()}}
 {% endblock %}

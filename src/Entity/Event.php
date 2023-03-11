@@ -34,7 +34,7 @@ class Event
     private Collection $comments;
 
     #[ORM\Column(length: 255, enumType:Severity::class)]
-    private ?string $severity = null;
+    private ?Severity $severity = null;
 
     public function __construct()
     {
@@ -112,15 +112,37 @@ class Event
         return $this;
     }
 
-    public function getSeverity(): ?string
+    public function getSeverity(): ?Severity
     {
         return $this->severity;
     }
 
-    public function setSeverity(string $severity): self
+    public function setSeverity(Severity $severity): self
     {
         $this->severity = $severity;
 
         return $this;
+    }
+
+    public function getSeverityClass(): string
+    {
+        switch($this->getSeverity()) {
+            default:
+            case Severity::INFORMATIONAL:
+                return 'secondary';
+                break;
+            case Severity::LOW:
+                return 'success';
+                break;
+            case Severity::MEDIUM:
+                return 'warning';
+                break;
+            case Severity::HIGH:
+                return 'danger';
+                break;
+            case Severity::CRITICAL:
+                return 'critical';
+                break;
+        }
     }
 }

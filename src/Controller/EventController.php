@@ -4,17 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Form\NewEventFormType;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\IncidentRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class EventController extends AbstractController
 {
     #[Route('/incident/{id}/event/new', name: 'new_event')]
-    public function index(Request $request, EntityManager $entityManager, IncidentRepository $incidentRepository, int $id): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, IncidentRepository $incidentRepository, int $id): Response
     {
         $incident = $incidentRepository->find($id);
         $event = new Event();

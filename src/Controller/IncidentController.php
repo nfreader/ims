@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Incident;
 use App\Form\NewEventFormType;
+use App\Repository\EventRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,6 +37,7 @@ class IncidentController extends AbstractController
         ]);
         return $this->render('incident/index.html.twig', [
             'incident' => $incident,
+            'events' => $incident->getEvents(),
             'eventForm' => $form->createView()
         ]);
     }

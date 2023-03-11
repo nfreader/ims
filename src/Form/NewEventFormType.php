@@ -23,13 +23,13 @@ class NewEventFormType extends AbstractType
                 'class' => Severity::class,
                 'expanded' => true,
                 'row_attr' => ['class' => 'list-group',],
-                'choice_label' => fn ($choice) => match ($choice) {
-                    Severity::INFORMATIONAL => "Informational",
-                    Severity::LOW => "Low",
-                    Severity::MEDIUM => "Medium",
-                    Severity::HIGH => "High",
-                    Severity::CRITICAL => "Critical"
-                }
+                // 'choice_label' => fn ($choice) => match ($choice) {
+                //     Severity::INFORMATIONAL => "Informational",
+                //     Severity::LOW => "Low",
+                //     Severity::MEDIUM => "Medium",
+                //     Severity::HIGH => "High",
+                //     Severity::CRITICAL => "Critical"
+                // }
             ])
         ;
     }
