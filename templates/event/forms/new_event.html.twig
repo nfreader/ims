@@ -1,0 +1,10 @@
+{{ form_start(eventForm) }}
+    {{ form_row(eventForm.title, {
+        label: 'Event Title'
+    }) }}
+    {{ form_row(eventForm.description, {
+        label: 'Event Description'
+    }) }}
+    {{ form_row(eventForm.severity) }}
+    <button type="submit" class="btn btn-primary">Add Event to Incident</button>
+{{ form_end(eventForm) }}

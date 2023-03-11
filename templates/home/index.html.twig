@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+	{% for i in incidents %}
+        <div class="col-12 col-md-4">
+		<div class="card">
+			<div class="card-body">
+				<a href="" class="stretched-link text-decoration-none"><span class="h1">{{i.getName}}</span></a>
+				<p class="text-muted mb-0 text-end">created by
+				{{i.creator.getEmail}}</p>
+			</div>
+		</div>
+        </div>
+	{% else %}
+		<p>No incidents yet. Create your first one:</p>
+	{% endfor %}
+    </div>
+    <hr>
+	<div class="card text-bg-light">
+		<div class="card-body">
+			{% include 'incident/forms/new_incident.html.twig' %}
+		</div>
+	</div>
+{% endblock %}

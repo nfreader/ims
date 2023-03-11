@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IncidentController!
+{% endblock %}
+
+{% block body %}
+	<div class="page-header d-flex justify-content-between align-items-center border-bottom pb-2 mb-2">
+		<h1>{{incident.name}}</h1>
+		<div class="text-end">
+			Created by
+			{{incident.creator.getEmail}}<br>
+			at
+			{{incident.createdAt.format('Y-m-d H:i:s')}}
+		</div>
+	</div>
+	<div class="card text-bg-light">
+	<div class="card-body">
+	{% include 'event/forms/new_event.html.twig' %}
+	</div>
+	</div>
+	{{dump()}}
+{% endblock %}

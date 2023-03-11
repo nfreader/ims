@@ -1,19 +1,53 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<html data-bs-theme="dark">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚠️</text></svg>">
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+			<div class="container">
+				<a class="navbar-brand font-monospace" href="#">IMS</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarColor01">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						{% if app.user %}
+							<li class="nav-item">
+								<a class="nav-link" aria-current="page" href="#">Incidents</a>
+							</li>
+						{% endif %}
+					</ul>
+					{% if app.user %}
+						<a href="{{ path('app_logout') }}" class="btn btn-sm btn-outline-secondary" type="submit">Logout</a>
+					{% else %}
+						<a href="{{ path('app_login') }}" class="btn btn-sm btn-outline-secondary" type="submit">Login</a>
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			{% for label, messages in app.flashes %}
+				{% for message in messages %}
+					<div class="fade show alert alert-{{label}} flash flash-{{ label }}" role="alert" data-bs-dismiss="alert">
+						{{ message }}
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				{% endfor %}
+			{% endfor %}
+			{% block body %}{% endblock %}
+		</div>
+	</body>
 </html>
